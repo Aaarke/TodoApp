@@ -3,21 +3,21 @@ import './Counter.css'
 
 
 class Counter extends Component {
-    constructor(props){
-        super(props)
+    constructor(){
+        super()
         this.state={count:0}
         this.increament=this.increament.bind(this)
     }
     render(){
     return (
       <div className="counterComponent">
-       <button onClick={this.increament}>+1</button>
+       <button onClick={this.increament}>+{this.props.by}</button>
     <span className="count">{this.state.count}</span>
       </div>
     )}
 
      increament(){
-        this.setState({count:this.state.count+1})
+        this.setState({count:this.state.count+this.props.by})
     }
   }
 
