@@ -7,18 +7,26 @@ class Counter extends Component{
     super()
     this.state={count:0}
     this.increament=this.increament.bind(this)
+    this.decrement=this.decrement.bind(this)
 }
 
 increament(by){
-  console.log(`increment from parent- ${by}`)
-  // this.setState({count:this.state.count+this.props.by})
+  this.setState(
+    (prevState)=>{return{count:prevState.count+by}})
+}
+decrement(by){
+  this.setState(
+    (prevState)=>{return{count:prevState.count-by}})
 }
   render(){
     return (
       <div className="Counter">
-       <CounterButton by={1} increamentMethod={this.increament}></CounterButton>
-       <CounterButton by={5} increamentMethod={this.increament}></CounterButton>
-       <CounterButton by={10}increamentMethod={this.increament}></CounterButton>
+       <CounterButton by={1} increamentMethod={this.increament} decrementMethod={this.decrement}></CounterButton>
+       <CounterButton by={5} increamentMethod={this.increament} decrementMethod={this.decrement}></CounterButton>
+       <CounterButton by={10}increamentMethod={this.increament} decrementMethod={this.decrement}></CounterButton>
+       <div className=><button>Reset</button></div>
+
+       <span className="count">{this.state.count}</span>
       </div>
       
     );
@@ -29,12 +37,14 @@ class CounterButton extends Component {
         super()
         this.state={count:0}
         this.increament=this.increament.bind(this)
+        this.decrement=this.decrement.bind(this)
+
     }
     render(){
     return (
       <div className="counterComponent">
        <button onClick={this.increament}>+{this.props.by}</button>
-    <span className="count">{this.state.count}</span>
+       <button onClick={this.decrement}>-{this.props.by}</button>
       </div>
     )}
 
@@ -42,6 +52,11 @@ class CounterButton extends Component {
         this.setState({count:this.state.count+this.props.by})
         this.props.increamentMethod(this.props.by);
     }
+
+    decrement(){
+      this.setState({count:this.state.count-this.props.by})
+      this.props.decrementMethod(this.props.by);
+  }
   }
 
   
