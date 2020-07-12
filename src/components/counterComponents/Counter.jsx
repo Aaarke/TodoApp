@@ -8,6 +8,13 @@ class Counter extends Component{
     this.state={count:0}
     this.increament=this.increament.bind(this)
     this.decrement=this.decrement.bind(this)
+    this.reset=this.reset.bind(this)
+
+}
+
+reset(by){
+  this.setState(
+    (prevState)=>{return{count:0}})
 }
 
 increament(by){
@@ -24,7 +31,7 @@ decrement(by){
        <CounterButton by={1} increamentMethod={this.increament} decrementMethod={this.decrement}></CounterButton>
        <CounterButton by={5} increamentMethod={this.increament} decrementMethod={this.decrement}></CounterButton>
        <CounterButton by={10}increamentMethod={this.increament} decrementMethod={this.decrement}></CounterButton>
-       <div className=><button>Reset</button></div>
+       <div ><button className="reset" onClick={this.reset}>Reset</button></div>
 
        <span className="count">{this.state.count}</span>
       </div>
