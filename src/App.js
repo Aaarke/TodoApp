@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
 import './components/counterComponents/Counter'
-import Counter from './components/counterComponents/Counter';
+import Counter from './components/counterComponents/Counter'
+import TodoApp from './components/counterComponents/todo/TodoApp'
+import LoginComponent from './components/counterComponents/todo/TodoApp'
 
 function App() {
   return (
     <div className="App">
-     <Counter/>
+     {/*<Counter/>*/}
+     <TodoApp/>
     
     </div>
     
