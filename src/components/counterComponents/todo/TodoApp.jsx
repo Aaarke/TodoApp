@@ -17,25 +17,40 @@ class LoginComponent extends Component{
             username: 'in28minutes',
             password: ''
         }
-    this.handleUsernameChange=this.handleUsernameChange.bind(this)
-    this.handlePasswordChange=this.handlePasswordChange.bind(this)
+    // this.handleUsernameChange=this.handleUsernameChange.bind(this)
+    // this.handlePasswordChange=this.handlePasswordChange.bind(this)
+    this.handleChange=this.handleChange.bind(this)
+    this.onLoginClicked=this.onLoginClicked.bind(this)
     }
-    handleUsernameChange(event){
+    handleChange(event){
         console.log(event.target.value)
-        this.setState({username:event.target.value})
+        this.setState({[event.target.name]:event.target.value})
     }
 
-    handlePasswordChange(event){
-        console.log(event.target.value)
-        this.setState({password:event.target.value})
+    onLoginClicked(){
+        console.log(this.state)
+        if(this.state.username==='in28minutes'&&this.state.password==='dummy'){
+            console.log('Login Successful')
+
+        }else{
+            console.log('Invalid Credential')
+        }
+
     }
+
+
+
+    
 
     render(){
         return(
+            
             <div>
-           User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleUsernameChange}/>
-           Password: <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
-           <button>Login</button>
+                <div>Invalid creadentails</div>
+            <div>Successful Login</div>
+           User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+           Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+           <button onClick={this.onLoginClicked}>Login</button>
            </div>
         )
     }
