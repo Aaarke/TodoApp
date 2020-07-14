@@ -15,7 +15,9 @@ class LoginComponent extends Component{
         super(props)
         this.state={
             username: 'in28minutes',
-            password: ''
+            password: '',
+            hasLoginFailed:false,
+            showSuccessMessage:false
         }
     // this.handleUsernameChange=this.handleUsernameChange.bind(this)
     // this.handlePasswordChange=this.handlePasswordChange.bind(this)
@@ -28,12 +30,14 @@ class LoginComponent extends Component{
     }
 
     onLoginClicked(){
-        console.log(this.state)
         if(this.state.username==='in28minutes'&&this.state.password==='dummy'){
             console.log('Login Successful')
-
+            this.setState({showSuccessMessage:true})
+            this.setState({hasLoginFailed:false})
         }else{
             console.log('Invalid Credential')
+            this.setState({showSuccessMessage:false})
+            this.setState({hasLoginFailed:true})
         }
 
     }
@@ -44,16 +48,33 @@ class LoginComponent extends Component{
 
     render(){
         return(
-            
-            <div>
-                <div>Invalid creadentails</div>
-            <div>Successful Login</div>
+        <div>
+            <ShowInvalidCredential hasLoginFailed={this.state.hasLoginFailed}/>
+            <IsLoginSuccessful showSuccessMessage={this.state.showSuccessMessage}/>
            User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
            Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
            <button onClick={this.onLoginClicked}>Login</button>
-           </div>
+        </div>
+           
         )
     }
+
+    
 }
 
+function ShowInvalidCredential(props){
+    if(props.hasLoginFailed){
+       return <div>Invalid creadentails</div>
+    }
+    return null
+
+}
+function IsLoginSuccessful(props){
+    if(props.showSuccessMessage){
+       return <div>Successful Login</div>
+
+    }
+    return null
+
+}
 export default TodoApp
