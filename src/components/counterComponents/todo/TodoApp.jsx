@@ -5,9 +5,16 @@ class TodoApp extends Component{
       return(
           <div className="TodoApp">
              <LoginComponent/>
+             <WelcomeComponent/>
           </div>
       )
   }
+}
+
+class WelcomeComponent extends Component{
+    render(){
+        return <div>Welcome in28minutes</div>
+    }
 }
 
 class LoginComponent extends Component{
