@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
 class TodoApp extends Component {
     render() {
         return (
             <div className="TodoApp">
                 <Router>
+                    <HeaderComponent />
                     <Switch>
                         <Route path="/" exact component={LoginComponent} />
                         <Route path="/login" component={LoginComponent} />
                         <Route path="/welcome/:name" component={WelcomeComponent} />
                         <Route path="/todos" component={ListTodosComponent} />
+                        <Route path="/logout" component={LogoutComponent} />
                         <Route component={ErrorComponent} />
                     </Switch>
+                    <FooterComponent />
                 </Router>
                 {/* <LoginComponent/>
              <WelcomeComponent/>*/}
@@ -23,7 +26,15 @@ class TodoApp extends Component {
 
 class WelcomeComponent extends Component {
     render() {
-        return <div>Welcome {this.props.match.params.name}</div>
+        return(
+        <>
+        <h1>Welcome!</h1>
+        <div className="container">
+        Welcome {this.props.match.params.name}
+        </div>
+        </>
+       
+    )
     }
 }
 
@@ -44,9 +55,12 @@ class ListTodosComponent extends Component {
         }
     }
     render() {
-        return (<div>
+        return (
+        
+        <div>
             <h1>List Todos</h1>
-            <table>
+            <div className="container">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -65,6 +79,8 @@ class ListTodosComponent extends Component {
                     }
                 </tbody>
             </table>
+    
+            </div>
         </div>
         )
     }
@@ -109,27 +125,69 @@ class LoginComponent extends Component {
 
     }
 
-
-
-
-
     render() {
         return (
             <div>
-                {this.state.hasLoginFailed && <div>Invalid creadentails</div>}
+                <h1>Login</h1>
+                <div className="container">
+                {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid creadentails</div>}
                 {this.state.showSuccessMessage && <div>Login Successful</div>}
 
                 { /*<ShowInvalidCredential hasLoginFailed={this.state.hasLoginFailed}/>*/}
                 { /* <IsLoginSuccessful showSuccessMessage={this.state.showSuccessMessage}/>*/}
            User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
            Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                <button onClick={this.onLoginClicked}>Login</button>
+                <button className="btn btn-success" onClick={this.onLoginClicked}>Login</button>
+            </div>
             </div>
 
         )
     }
 
 
+}
+
+
+class LogoutComponent extends Component{
+    render(){
+        return(
+            <div>
+                <h1>you are logged out</h1>
+                <div className="container">
+                    Thank you for using our Application.
+                </div>
+            </div>
+        )
+    }
+}
+
+class HeaderComponent extends Component {
+    render() {
+        return (<header>
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                <div><a href="https://twitter.com/roshan_aaarke" className="navbar-brand">Learn with Aaarke</a></div>
+                <ul className="navbar-nav">
+                    <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link>Home</li>
+                    <li><Link className="nav-link" to="/todos">Todos</Link>Todos</li>
+                </ul>
+                <ul className="navbar-nav navbar-collapse justify-content-end">
+                    <li><Link className="nav-link" to="/login">Login</Link>Login</li>
+                    <li><Link className="nav-link" to="/logout">Logout</Link>Logout</li>
+
+                </ul>
+            </nav>
+        </header>)
+    }
+}
+
+class FooterComponent extends Component {
+    render() {
+        return (
+            <footer className="footer">
+                <span className="text-muted">All right reserved 2020 @Aaarke</span>
+            </footer>
+        )
+    }
 }
 
 function ShowInvalidCredential(props) {
