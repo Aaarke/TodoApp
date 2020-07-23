@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
-
+import AuthenticationService from './AuthenticationService.js'
 class TodoApp extends Component {
     render() {
         return (
@@ -114,7 +114,9 @@ class LoginComponent extends Component {
     onLoginClicked() {
         if (this.state.username === 'in28minutes' && this.state.password === 'dummy') {
             //{/welcome}
+            AuthenticationService.registerSuccessfullLogin(this.state.username,this.state.password)
             this.props.history.push(`/welcome/${this.state.username}`)
+
             //this.setState({showSuccessMessage:true})
             //this.setState({hasLoginFailed:false})
         } else {
@@ -167,12 +169,12 @@ class HeaderComponent extends Component {
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                 <div><a href="https://twitter.com/roshan_aaarke" className="navbar-brand">Learn with Aaarke</a></div>
                 <ul className="navbar-nav">
-                    <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link>Home</li>
-                    <li><Link className="nav-link" to="/todos">Todos</Link>Todos</li>
+                    <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>
+                    <li><Link className="nav-link" to="/todos">Todos</Link></li>
                 </ul>
                 <ul className="navbar-nav navbar-collapse justify-content-end">
-                    <li><Link className="nav-link" to="/login">Login</Link>Login</li>
-                    <li><Link className="nav-link" to="/logout">Logout</Link>Logout</li>
+                    <li><Link className="nav-link" to="/login">Login</Link></li>
+                    <li><Link className="nav-link" to="/logout">Logout</Link></li>
 
                 </ul>
             </nav>
