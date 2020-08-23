@@ -12,11 +12,11 @@ class ListTodosComponent extends Component {
         console.log("in the constructor")
         this.state = {
             todos: [],
-            message:''
+            message: ''
         }
-        this.onDeletdClicked=this.onDeletdClicked.bind(this)
-        this.refreshTodoPage=this.refreshTodoPage.bind(this)
-        this.updateTodo=this.updateTodo.bind(this)
+        this.onDeletdClicked = this.onDeletdClicked.bind(this)
+        this.refreshTodoPage = this.refreshTodoPage.bind(this)
+        this.updateTodo = this.updateTodo.bind(this)
     }
 
 
@@ -25,7 +25,7 @@ class ListTodosComponent extends Component {
         this.refreshTodoPage()
     }
 
-    refreshTodoPage(){
+    refreshTodoPage() {
         let username = AuthenticationService.getLoggedInUser()
         TodoDataService.retriveAllTodos(username)
             .then(response => {
@@ -44,7 +44,7 @@ class ListTodosComponent extends Component {
 
             <div>
                 <h1>List Todos</h1>
-        {this.state.message&&<div className="alert alert-success">{this.state.message}</div>}
+                {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                     <table className="table">
                         <thead>
@@ -65,8 +65,8 @@ class ListTodosComponent extends Component {
                                             day: "2-digit"
                                         }).format(new Date(todo.targetDate))}</td>
                                         <td>{todo.done.toString()}</td>
-                                        <td><button className="bnt btn-success" onClick={()=>this.updateTodo(todo.id)}>Update</button></td>
-                                        <td><button className="bnt btn-warning" onClick={()=>this.onDeletdClicked(todo.id)}>Delete</button></td>
+                                        <td><button className="bnt btn-success" onClick={() => this.updateTodo(todo.id)}>Update</button></td>
+                                        <td><button className="bnt btn-warning" onClick={() => this.onDeletdClicked(todo.id)}>Delete</button></td>
 
 
                                     </tr>
@@ -81,22 +81,22 @@ class ListTodosComponent extends Component {
         )
     }
 
-    onDeletdClicked(id){
-        let username=AuthenticationService.getLoggedInUser()
-        TodoDataService.deleteTodo(username,id).then(response=>{
-            this.setState({message: `Delete of todo ${id} is successful`})
+    onDeletdClicked(id) {
+        let username = AuthenticationService.getLoggedInUser()
+        TodoDataService.deleteTodo(username, id).then(response => {
+            this.setState({ message: `Delete of todo ${id} is successful` })
             this.refreshTodoPage()
-        }).catch(error=>{
+        }).catch(error => {
 
         })
     }
 
-    updateTodo(id){
+    updateTodo(id) {
         this.props.history.push(`/todos/${id}`)
 
     }
 
-   
+
 }
 
 export default ListTodosComponent
